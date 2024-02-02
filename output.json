@@ -1,0 +1,75 @@
+{
+  "namespace": "ui_animation",
+  "animation": {
+    "anim_type": "uv",
+    "easing": "linear",
+    "from": "$uv_frame",
+    "to": "$uv_frame",
+    "duration": 1
+  },
+  "start_animation": {
+    "type": "image",
+    "uv_size": [
+      44,
+      44
+    ],
+    "uv": "@ui_animation.animation",
+    "texture": "uida/output.png"
+  },
+  "frame0@ui_animation.animation": {
+    "$uv_frame": [
+      0,
+      44
+    ],
+    "next": "@ui_animation.frame1"
+  },
+  "frame1@ui_animation.animation": {
+    "$uv_frame": [
+      0,
+      88
+    ],
+    "next": "@ui_animation.frame2"
+  },
+  "frame2@ui_animation.animation": {
+    "$uv_frame": [
+      0,
+      132
+    ],
+    "next": "@ui_animation.frame3"
+  },
+  "frame3@ui_animation.animation": {
+    "$uv_frame": [
+      0,
+      176
+    ],
+    "next": "@ui_animation.frame4"
+  },
+  "frame4@ui_animation.animation": {
+    "$uv_frame": [
+      0,
+      220
+    ],
+    "next": "@ui_animation.frame5"
+  },
+  "frame5@ui_animation.animation": {
+    "$uv_frame": [
+      0,
+      264
+    ],
+    "next": "@ui_animation.frame6"
+  },
+  "frame6@ui_animation.animation": {
+    "$uv_frame": [
+      0,
+      308
+    ],
+    "next": "@ui_animation.frame7"
+  },
+  "frame7@ui_animation.animation": {
+    "$uv_frame": [
+      0,
+      352
+    ],
+    "next": "@ui_animation.frame0"
+  }
+}
