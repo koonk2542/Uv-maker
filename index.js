@@ -6,14 +6,6 @@ const canvasGif = require("canvas-gif");
 const config = require("./config.json");
 let json = {
   namespace: "ui_animation",
-
-  animation: {
-    anim_type: "uv",
-    easing: "linear",
-    from: "$uv_frame",
-    to: "$uv_frame",
-    duration: config.duration ?? 0.5,
-  },
 };
 let frames = [];
 
@@ -75,28 +67,42 @@ fs.stat(klasorYolu, (err, stats) => {
     console.log("En uzun with:", maxHeight);
     console.log("En uzun height:", maxWitdh);
     console.log("Toplam height:", totalWidth);
-    json.start_animation = {
-      type: "image",
-      uv_size: [maxHeight, maxWitdh],
-      uv: "@ui_animation.animation",
-      texture: "uida/output.png",
-    };
+
     const canvas = createCanvas(maxHeight, totalWidth);
     const ctx = canvas.getContext("2d");
     let x = 0;
     let f = 0;
+    json.animation = {
+      anim_type: "uv",
+      easing: "linear",
+      from: "$uv_frame",
+      to: "$uv_frame",
+      duration: config.duration ?? config.fps ? (1 / config.fps) : 1,
+    };
+    json.start_animation = {
+      type: "image",
+      uv_size: [maxHeight, maxWitdh],
+      size: config.size,
+      layer: config.layer,
+      anchor_from: config.anchor_from,
+      anchor_to: config.anchor_to,
+      uv: "@ui_animation.frame" + x,
+      texture: "uida/output.png",
+    };
     for (const frame of frames) {
       const image = await loadImage(frame.data);
       ctx.drawImage(image, 0, x);
-      x += frame.height;
+
       let next = f + 1;
       if (next >= frames.length) next = 0;
       json[`frame${f}@ui_animation.animation`] = {
         $uv_frame: [0, x],
         next: `@ui_animation.frame${next}`,
       };
+      x += frame.height;
       f = f + 1;
     }
+
     const buffer = await canvas.toBuffer("image/png");
     await fs.writeFileSync(path.join(__dirname, "output.png"), buffer);
     console.log("Resim tamamlandı,");

@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@napi-rs/canvas": "^0.1.44",
+    "canvas-gif": "^1.0.3",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7"
+  }
+}
